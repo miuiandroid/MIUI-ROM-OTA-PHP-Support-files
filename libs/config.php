@@ -13,8 +13,8 @@ include('settings.php');
 $settings = new settings();
 
 //Configure database params
-$settings->mysql_db			= "ota";		// name of database, recommend to call it ota
-$settings->mysql_host		= "CHANGEME";	// Your MySQL host e.g. localhost or 127.0.0.1
+$settings->mysql_db       = "ota";		// name of database, recommend to call it ota
+$settings->mysql_host     = "CHANGEME";	// Your MySQL host e.g. localhost or 127.0.0.1
 $settings->mysql_username	= "CHANGEME";	// MySQL username
 $settings->mysql_password	= "CHANGEME";	// MySQL password
 
