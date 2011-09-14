@@ -36,10 +36,10 @@ $hardware_id = sanitise($_REQUEST['g'], FULLSCAN);
 $current_version = sanitise($_REQUEST['v'], FULLSCAN);
 
 // Manufacturer board name e.g. herring
-$hardware_board = $_REQUEST['b'];
+$hardware_board = sanitise($_REQUEST['b'], FULLSCAN);
 
 // Manufacturer device name e.g. crespo (Nexus S)
-$device_name = $_REQUEST['d'];
+$device_name = sanitise($_REQUEST['d'], FULLSCAN);
 
 // IMEI code (Last 9 digits stored only)
 $imei_code = sanitise($_REQUEST['i'], FULLSCAN);
