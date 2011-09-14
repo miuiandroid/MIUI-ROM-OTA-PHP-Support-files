@@ -38,7 +38,7 @@ return strtr($string,
 // FULLSCAN sanitization -- only let the alphanumeric set through
 function sanitise_FULLSCAN_string($string, $min='', $max='')
 {
-  $string = preg_replace("/[^a-zA-Z0-9.,-]/", " ", $string);
+  $string = preg_replace("/[^a-zA-Z0-9.,-_]/", " ", $string);
   $len = strlen($string);
   if((($min != '') && ($len < $min)) || (($max != '') && ($len > $max)))
     return FALSE;
