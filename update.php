@@ -7,11 +7,8 @@
 	
 	Last modified: Wednesday August 17th 2011
 
-	update.json?g=6884c3642fc5a684&
-v=MIUI-1.8.12&b=spade&d=ace&i=047964240&t=hRNhb1IuL2GiwwUm3eR2lRBhOjitAJ9sLCnjWm
-oF7zKZ%2Frha4A%2Bci05bEQOfWh1nMXnsDVRFxkbm3sfvSkVm97ZPk%2B%2FaceVY5ie%2FGjKu0XXu
-bzgGv6Mu%2BwT4ojgKU%2F%2BqKIH3DoLKHz3Qkg0u5FZHj5Iq9O9ijYX3SzxLFSSzfL%2BSCHZWHOi4
-CbUBIFbkV4uf8meURmderzk%3D
+	update.json?g=6884c3642fc5a684&v=MIUI-1.8.12&b=spade&d=ace&i=IMEI&t=XIAOMI-SESSION-TOKEN
+
 
 */
 
