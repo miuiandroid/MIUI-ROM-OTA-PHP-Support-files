@@ -6,8 +6,7 @@ function current_rom($current_version, $hardware_board, $device_name)
 {
 	/*
 	// SQL
-	$sql = "SELECT * FROM devices WHERE version > '$current_version' AND device='$device_name' AND board='$hardware_board' 
-LIMIT 1";
+	$sql = "SELECT * FROM devices WHERE version > '$current_version' AND device='$device_name' AND board='$hardware_board' LIMIT 1";
 
 	// Query
 	$query = mysql_query($sql)or die(mysql_error());
@@ -22,19 +21,11 @@ LIMIT 1";
 	*/
 	
 	
+	
 	// select all versions for device
-	$sql = "SELECT version FROM devices WHERE device = '$device_name' AND board = '$hardware_board' ORDER by version";
+	$sql = "SELECT version FROM devices WHERE device = '$device_name' AND board = '$hardware_board' ORDER BY INET_ATON(version) DESC LIMIT 0, 1";
 	$query = mysql_query($sql);
-	
-	// build array with only version numbers
-	while($row = mysql_fetch_array($query)){
-		$versions[] = $row['version'];
-	}
-	
-	// sort them then grab the highest version number, beginning of the array
-	rsort($versions, SORT_NUMERIC);
-	$versions = array_reverse($versions);
-	$latest_version = $versions['0'];
+	$latest_version = mysql_result($query,0);
 
 
 	if(version_compare($current_version, $latest_version) < 0){
@@ -43,6 +34,9 @@ LIMIT 1";
 	}else{
 		//echo "no dice";
 	}	
+		
+
+	
 	
 }
 
@@ -51,8 +45,7 @@ function get_branch($hardware_board, $device_name, $version)
 {
 	
 	// SQL
-	$sql = "SELECT branch FROM devices WHERE version='$version' AND device='$device_name' AND board='$hardware_board' LIMIT 
-1";
+	$sql = "SELECT branch FROM devices WHERE version='$version' AND device='$device_name' AND board='$hardware_board' LIMIT 1";
 
 	// Query
 	$query = mysql_query($sql)or die(mysql_error());
@@ -77,27 +70,20 @@ function get_new_version($current_version)
 	return $version['version'];
 	*/
 	
+	
 	// select all versions for device
-	$sql = "SELECT version FROM devices ORDER by version";
+	$sql = "SELECT version FROM devices ORDER BY INET_ATON(version) DESC LIMIT 0, 1";
 	$query = mysql_query($sql);
-	
-	// build array with only version numbers
-	while($row = mysql_fetch_array($query)){
-		$versions[] = $row['version'];
-	}
-	
-	// sort them then grab the highest version number, beginning of the array
-	rsort($versions, SORT_NUMERIC);
-	$versions = array_reverse($versions);
-	$latest_version = $versions['0'];
+	$latest_version = mysql_result($query,0);
 
 
 	if(version_compare($current_version, $latest_version) < 0){
-		// current version is less than the latest version, return latest version
+		//echo "success";
 		return $latest_version;
 	}else{
-		//
-	}		
+		//echo "no dice";
+	}	
+
 	
 }
 
@@ -105,8 +91,7 @@ function get_new_version($current_version)
 function get_device_name($hardware_board, $device_name, $new_version)
 {
 		// SQL
-	$sql = "SELECT * FROM devices WHERE version='$new_version' AND board='$hardware_board' AND device='$device_name' LIMIT 
-1";
+	$sql = "SELECT * FROM devices WHERE version='$new_version' AND board='$hardware_board' AND device='$device_name' LIMIT 1";
 
 		// Query
 		$query = mysql_query($sql)or die(mysql_error());
@@ -133,8 +118,7 @@ function get_new_filesize($hardware_board, $device_name, $new_version)
 function get_filesize($hardware_board, $device_name, $current_version)
 {
 		// SQL
-	$sql = "SELECT * FROM devices WHERE version='$current_version' AND board='$hardware_board' AND device='$device_name' 
-LIMIT 1";
+	$sql = "SELECT * FROM devices WHERE version='$current_version' AND board='$hardware_board' AND device='$device_name' LIMIT 1";
 
 		// Query
 		$query = mysql_query($sql)or die(mysql_error());
@@ -148,8 +132,7 @@ LIMIT 1";
 function get_new_filename($hardware_board, $device_name, $new_version)
 {
 		// SQL
-	$sql = "SELECT * FROM devices WHERE version='$new_version' AND board='$hardware_board' AND device='$device_name' LIMIT 
-1";
+	$sql = "SELECT * FROM devices WHERE version='$new_version' AND board='$hardware_board' AND device='$device_name' LIMIT 1";
 		
 	// Query
 		$query = mysql_query($sql)or die(mysql_error());
@@ -163,8 +146,7 @@ function get_new_filename($hardware_board, $device_name, $new_version)
 function get_filename($hardware_board, $device_name, $current_version)
 {
 		// SQL
-	$sql = "SELECT * FROM devices WHERE version='$current_version' AND board='$hardware_board' AND device='$device_name' 
-LIMIT 1";
+	$sql = "SELECT * FROM devices WHERE version='$current_version' AND board='$hardware_board' AND device='$device_name' LIMIT 1";
 
 		// Query
 		$query = mysql_query($sql)or die(mysql_error());
@@ -178,8 +160,7 @@ LIMIT 1";
 function get_checksum($hardware_board, $device_name, $current_version)
 {
 		// SQL
-	$sql = "SELECT * FROM devices WHERE version='$current_version' AND board='$hardware_board' AND device='$device_name' 
-LIMIT 1";
+	$sql = "SELECT * FROM devices WHERE version='$current_version' AND board='$hardware_board' AND device='$device_name' LIMIT 1";
 
 		// Query
 		$query = mysql_query($sql)or die(mysql_error());
@@ -193,8 +174,7 @@ LIMIT 1";
 function get_new_checksum($hardware_board, $device_name, $new_version)
 {
 		// SQL
-	$sql = "SELECT * FROM devices WHERE version='$new_version' AND board='$hardware_board' AND device='$device_name' LIMIT 
-1";
+	$sql = "SELECT * FROM devices WHERE version='$new_version' AND board='$hardware_board' AND device='$device_name' LIMIT 1";
 
 		// Query
 		$query = mysql_query($sql)or die(mysql_error());

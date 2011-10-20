@@ -7,8 +7,11 @@
 	
 	Last modified: Wednesday August 17th 2011
 
-	update.json?g=6884c3642fc5a684&v=MIUI-1.8.12&b=spade&d=ace&i=IMEI&t=XIAOMI-SESSION-TOKEN
-
+	update.json?g=6884c3642fc5a684&
+v=MIUI-1.8.12&b=spade&d=ace&i=047964240&t=hRNhb1IuL2GiwwUm3eR2lRBhOjitAJ9sLCnjWm
+oF7zKZ%2Frha4A%2Bci05bEQOfWh1nMXnsDVRFxkbm3sfvSkVm97ZPk%2B%2FaceVY5ie%2FGjKu0XXu
+bzgGv6Mu%2BwT4ojgKU%2F%2BqKIH3DoLKHz3Qkg0u5FZHj5Iq9O9ijYX3SzxLFSSzfL%2BSCHZWHOi4
+CbUBIFbkV4uf8meURmderzk%3D
 
 */
 
@@ -17,9 +20,9 @@ include('libs/config.php');
 
 // Set the new and old versions manually e.g. new = 1.8.12 old = 1.8.5
 
-$new_ver = '1_8_30';
+$new_ver = '1_10_20';
 
-$old_ver = '1_8_19';
+$old_ver = '1_10_8';
 
 if(empty($_GET))
 {
@@ -34,6 +37,9 @@ $hardware_id = sanitise($_REQUEST['g'], FULLSCAN);
 
 // Users currently installed version
 $current_version = sanitise($_REQUEST['v'], FULLSCAN);
+
+$current_version = substr($current_version, 5,7);
+
 
 // Manufacturer board name e.g. herring
 $hardware_board = sanitise($_REQUEST['b'], FULLSCAN);
@@ -72,7 +78,7 @@ echo '{
         "filename":"'.get_new_filename($hardware_board, $device_name, $new_version).'",
         "filesize":"'.get_new_filesize($hardware_board, $device_name, $new_version).'",
         "mod":"'.$device_name.'",
-        "version": "'.$new_version.'",
+        "version": "MIUI-'.$new_version.'",
         "branch": "'.get_branch($hardware_board, $device_name, $new_version).'"
    },
     "UpdateList": [
@@ -88,12 +94,20 @@ echo '{
 	    "filename":"'.get_filename($hardware_board, $device_name, $current_version).'",
 	    "filesize":"'.get_new_filesize($hardware_board, $device_name, $current_version).'",
 	    "mod":"'.$device_name.'",
-            "version": "'.$current_version.'",
+            "version": "MIUI-'.$current_version.'",
             "branch": "'.get_branch($hardware_board, $device_name, $current_version).'"
         }
     ],
     "IncrementalUpdateList": [
-        {
+	';
+if($current_version == $new_version)
+{
+
+}
+else
+{
+
+echo '        {
 	    "type":"rom",
 	    "board":"'.$hardware_board.'",
 	    "name":"'.get_device_name($hardware_board, $device_name, $new_version).' OTA from: '.$current_version.'",
@@ -105,16 +119,19 @@ echo '{
             "filename":"'.get_new_filename($hardware_board, $device_name, $new_version).'",
 	    "filesize":"'.get_new_filesize($hardware_board, $device_name, $new_version).'",
 	    "mod":"'.$device_name.'",
-	    "version":"'.substr($new_version, 5).'",
-	    "versionForApply":"'.substr($current_version, 5).'",
+	    "version":"'.$new_version.'",
+	    "versionForApply":"'.$current_version.'",
 	    "branch":"X"
-        }
-    ],
-    "MirrorList": [
-        "http://miuiandroid.com/ota/"
+        }';
+}
+echo '    ],
+
+"MirrorList": [
+        "http://miuiandroid.com/ota/",
+	"http://corei7.miuiandroid.com/ota/"
     ],
     "Signup": {
-        "version": "'.$new_version.'",
+        "version": "MIUI-'.$new_version.'",
         "total": "",
         "rank": ""
     }
