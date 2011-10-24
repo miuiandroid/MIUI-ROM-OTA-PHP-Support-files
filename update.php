@@ -111,7 +111,7 @@ echo '        {
 	    "type":"rom",
 	    "board":"'.$hardware_board.'",
 	    "name":"'.get_device_name($hardware_board, $device_name, $new_version).' OTA from: '.$current_version.'",
-	    "acknowledgementUrl":"",
+	    "acknowledgement":"",
             "acknowledgementUrl": "http://miuiandroid.com/ota/'.$new_ver.'_ack.html",
             "descriptionUrl": "http://miuiandroid.com/ota/'.$new_ver.'_desc.html",
 	    "description":"MIUIAndroid '.get_device_name($hardware_board, $device_name, $new_version).' ROM '.$new_version.'",
