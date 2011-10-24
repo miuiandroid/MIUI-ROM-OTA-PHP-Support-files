@@ -4,7 +4,7 @@ include('libs/config.php');
 
 // Change to current release, needs to be made dynamic eventually
 // open to changes to make this more flexible
-$current_rel = "1.8.30";
+$current_rel = sanitise($_POST["fversion"], FULLSCAN);
 
 // Function to ensure OTA is not already inserted, if it is we ignore it and move to the next device
 function check_ota_inserted($device, $board, $version)
@@ -78,83 +78,107 @@ $ota_filesize = filesizeinfo($filesize);
 // MD5 of OTA (Change the path to suite your local UNIX path to the OTA repository)
 $checksum = md5_file("/home/miuiandroid/public_html/ota/".$current_rel."/miuiandroid_".device_name($file)."-".$current_rel.".zip");
 
-if(device_name($file) == 'Captivate')
+if(strtoupper(device_name($file)) == strtoupper('Captivate'))
 {
 	$board = 'aries';
 	$device = 'captivatemtd';
 	$name = 'Samsung Captivate';
 }
-else if(device_name($file) == 'Defy')
+else if(strtoupper(device_name($file)) == strtoupper('Defy'))
 {
 	$board = 'jordan';
 	$device = 'umts_jordan';
 	$name = 'Motorola Defy';
 }
-else if(device_name($file) == 'Desire')
+else if(strtoupper(device_name($file)) == strtoupper('Desire'))
 {
 	$board = 'bravo';
 	$device = 'bravo';
 	$name = 'HTC Desire';
 }
-else if(device_name($file) == 'DesireZ')
+else if(strtoupper(device_name($file)) == strtoupper('DesireZ'))
 {
 	$board = 'vision';
 	$device = 'vision';
-	$name = 'HTC DesireZ';
+	$name = 'HTC Desire Z';
 }
-else if(device_name($file) == 'DHD')
+else if(strtoupper(device_name($file)) == strtoupper('DHD'))
 {
 	$board = 'spade';
 	$device = 'ace';
 	$name = 'HTC Desire HD';
 }
-else if(device_name($file) == 'HD2')
+else if(strtoupper(device_name($file)) == strtoupper('HD2'))
 {
 	$board = 'leo';
 	$device = 'leo';
-	$name = 'HTC HD2';
+	$name = 'HTC Desire HD2';
 }
-else if(device_name($file) == 'I9000')
+else if(strtoupper(device_name($file)) == strtoupper('I9000'))
 {
 	$board = 'aries';
 	$device = 'galaxys';
-	$name = 'Samsung GalaxyS';
+	$name = 'Samsung Galaxy S';
 }
-else if(device_name($file) == 'Milestone')
+else if(strtoupper(device_name($file)) == strtoupper('IncredibleS'))
+{
+	$board = 'vivo';
+	$device = 'vivo';
+	$name = 'HTC Incredible S';
+}
+else if(strtoupper(device_name($file)) == strtoupper('Milestone'))
 {
 	$board = 'sholes';
 	$device = 'umts_sholes';
 	$name = 'Motorola Milestone';
 }
-else if(device_name($file) == 'N1')
+else if(strtoupper(device_name($file)) == strtoupper('N1'))
 {
 	$board = 'mahimahi';
 	$device = 'passion';
 	$name = 'Google Nexus One';
 }
-else if(device_name($file) == 'NS')
+else if(strtoupper(device_name($file)) == strtoupper('NS'))
 {
 	$board = 'herring';
 	$device = 'crespo';
 	$name = 'Google Nexus S';
 }
-else if(device_name($file) == 'Vibrant')
+else if(strtoupper(device_name($file)) == strtoupper('Vibrant'))
 {
 	$board = 'aries';
 	$device = 'vibrantmtd';
 	$name = 'Samsung Vibrant';
 }
-else if(device_name($file) == 'Optimus2x')
+else if(strtoupper(device_name($file)) == strtoupper('Optimus2x'))
 {
 	$board = 'p990';
 	$device = 'p990';
 	$name = 'LG Optimus 2X';
 }
-else if(device_name($file) == 'DroidInc')
+else if(strtoupper(device_name($file)) == strtoupper('DroidInc'))
 {
 	$board = 'inc';
 	$device = 'inc';
 	$name = 'HTC Droid Incredible';
+}
+else if(strtoupper(device_name($file)) == strtoupper('mione'))
+{
+	$board = 'MIONE';
+	$device = 'mione_plus';
+	$name = 'Xiaomi MIONE plus';
+}
+else if(strtoupper(device_name($file)) == strtoupper('SGS2'))
+{
+	$board = 'GT-I9100';
+	$device = 'galaxys2';
+	$name = 'Samsung Galaxy S2';
+}
+else if(strtoupper(device_name($file)) == strtoupper('DesireS'))
+{
+	$board = 'saga';
+	$device = 'saga';
+	$name = 'HTC Desire S';
 }
 // End device specific name checks
 
