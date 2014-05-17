@@ -32,8 +32,12 @@ function check_files_name($file, $marker)
 // Function to get device name from file name
 function device_name($file)
 {
+	//This should solve issue of change lenght of version, 1.10.8 is 6 chars, 1.10.21 is 7 chars
+	$device = substr( trim($file) , 12, -1*( strlen($GLOBALS['current_rel']) + 5 ))
+        /*
         $device = substr($file, 12, 33);
         $device = substr($device, 0, -11);
+        */
         return $device;
 }
 // EF
